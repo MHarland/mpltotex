@@ -78,7 +78,7 @@ def set_masterthesis_parameters(height_factor = 1):
               }
     plt.rcParams.update(params)
 
-def set_log_parameters(monitor_dpi = 150, fig_width_pt = 390., height_width_ratio = False, font_size = 12, font_size_small = 8):
+def set_log_parameters(monitor_dpi = 72., fig_width_pt = 390., height_width_ratio = False, font_size = 12, font_size_small = 10):
     fig_width = fig_width_pt/monitor_dpi
     if height_width_ratio:
         fig_height = fig_width * height_width_ratio
@@ -86,7 +86,7 @@ def set_log_parameters(monitor_dpi = 150, fig_width_pt = 390., height_width_rati
         golden_mean = (sqrt(5)-1.0)/2.0
         fig_height = fig_width * golden_mean
     fig_size = [fig_width, fig_height]
-    params = {'backend': 'ps',
+    params = {'backend': 'PDF',
               'axes.labelsize': font_size,
               'font.size': font_size,
               'legend.fontsize': font_size_small,
