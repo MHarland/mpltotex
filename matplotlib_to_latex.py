@@ -2,7 +2,8 @@
 from matplotlib import pyplot as plt
 from numpy import sqrt
 
-def set_prl_parameters(monitor_dpi = 150, fig_width_pt = 510., height_width_ratio = False, font_size = 10, font_size_small = 9):
+
+def set_prl_parameters(monitor_dpi = 150, fig_width_pt = 510., height_width_ratio = False, font_size = 10, font_size_small = 8):
     fig_width = fig_width_pt/monitor_dpi
     if height_width_ratio:
         fig_height = fig_width * height_width_ratio
@@ -18,7 +19,10 @@ def set_prl_parameters(monitor_dpi = 150, fig_width_pt = 510., height_width_rati
               'xtick.labelsize': font_size_small,
               'ytick.labelsize': font_size_small,
               'text.usetex': True,
-              'figure.figsize': fig_size
+              'lines.markersize': font_size_small,
+              'figure.figsize': fig_size,
+              'image.cmap': 'viridis',
+              'savefig.dpi': 300
               #'font.family': font,
               #'font.serif': 'Roman'
               #'font.sans-serif': 'Helvetica'
@@ -26,6 +30,15 @@ def set_prl_parameters(monitor_dpi = 150, fig_width_pt = 510., height_width_rati
               #'mathtext.rm': font
               }
     plt.rcParams.update(params)
+
+class PRL:
+    def __init__(self):
+        set_prl_parameters()
+        self.ax_rectangle = (.13,.17,.84,.8)
+        self.fig = plt.figure()
+        self.ax = self.fig.add_axes(self.ax_rectangle)
+        self.legendkwargs = {'frameon': False, 'loc': 'best'}
+        self.plt = plt
     
 def set_superstripes_parameters(monitor_dpi = 150, fig_width_pt = 495., height_width_ratio = False, font_size = 10, font_size_small = 10):
     fig_width = fig_width_pt/monitor_dpi
