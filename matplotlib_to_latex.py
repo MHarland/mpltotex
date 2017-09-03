@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 from numpy import sqrt
 
 
-def set_prl_parameters(monitor_dpi = 150, fig_width_pt = 510., height_width_ratio = False, font_size = 10, font_size_small = 8):
+def set_prl_parameters(monitor_dpi = 150, fig_width_pt = 510., height_width_ratio = False, font_size = 10, font_size_small = 6):
     fig_width = fig_width_pt/monitor_dpi
     if height_width_ratio:
         fig_height = fig_width * height_width_ratio
@@ -12,8 +12,7 @@ def set_prl_parameters(monitor_dpi = 150, fig_width_pt = 510., height_width_rati
         fig_height = fig_width * golden_mean
     fig_size = [fig_width, fig_height]
     #font = "Times New Roman"
-    params = {'backend': 'ps',
-              'font.size': font_size,
+    params = {'font.size': font_size,
               'legend.fontsize': font_size_small,
               'axes.labelsize': font_size,
               'xtick.labelsize': font_size_small,
@@ -22,7 +21,11 @@ def set_prl_parameters(monitor_dpi = 150, fig_width_pt = 510., height_width_rati
               'lines.markersize': font_size_small,
               'figure.figsize': fig_size,
               'image.cmap': 'viridis',
-              'savefig.dpi': 300
+              'figure.dpi': 1200,
+              'savefig.dpi': 1200
+              #'backend': 'ps',
+              #"pgf.texsystem": "pdflatex",
+              #"pgf.rcfonts": False,
               #'font.family': font,
               #'font.serif': 'Roman'
               #'font.sans-serif': 'Helvetica'
@@ -32,13 +35,24 @@ def set_prl_parameters(monitor_dpi = 150, fig_width_pt = 510., height_width_rati
     plt.rcParams.update(params)
 
 class PRL:
-    def __init__(self):
+    def __init__(self, add_ax = True):
         set_prl_parameters()
-        self.ax_rectangle = (.13,.17,.84,.8)
+        self.ax_rectangle = (.16,.17,.81,.77)
         self.fig = plt.figure()
-        self.ax = self.fig.add_axes(self.ax_rectangle)
+        if add_ax:
+            self.ax = self.fig.add_axes(self.ax_rectangle)
         self.legendkwargs = {'frameon': False, 'loc': 'best'}
+        self.savefigkwargs = {'format': 'eps', 'dpi': 1200}
         self.plt = plt
+
+    def save(self, name):
+        outname = name+'.pdf'
+        self.plt.savefig(outname)
+        print outname, 'ready'
+        outname = name+'.eps'
+        self.plt.savefig(outname, **self.savefigkwargs)
+        print outname, 'ready'
+    
     
 def set_superstripes_parameters(monitor_dpi = 150, fig_width_pt = 495., height_width_ratio = False, font_size = 10, font_size_small = 10):
     fig_width = fig_width_pt/monitor_dpi
