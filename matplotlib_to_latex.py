@@ -22,7 +22,13 @@ def set_prl_parameters(monitor_dpi = 150, fig_width_pt = 510., height_width_rati
               'figure.figsize': fig_size,
               'image.cmap': 'viridis',
               'figure.dpi': 1200,
-              'savefig.dpi': 1200
+              'savefig.dpi': 1200,
+              'xtick.direction': 'in',
+              'ytick.direction': 'in',
+              'xtick.top': True,
+              'ytick.right': True,
+              'axes.axisbelow': False,
+              'lines.linewidth': .75,
               #'backend': 'ps',
               #"pgf.texsystem": "pdflatex",
               #"pgf.rcfonts": False,
@@ -35,13 +41,13 @@ def set_prl_parameters(monitor_dpi = 150, fig_width_pt = 510., height_width_rati
     plt.rcParams.update(params)
 
 class PRL:
-    def __init__(self, add_ax = True):
-        set_prl_parameters()
-        self.ax_rectangle = (.16,.17,.81,.77)
+    def __init__(self, monitor_dpi = 150, fig_width_pt = 510., height_width_ratio = False, font_size = 9, font_size_small = 8, add_ax = True, ax_rectangle = (.16,.2,.8,.77)):
+        set_prl_parameters(monitor_dpi, fig_width_pt, height_width_ratio, font_size, font_size_small)
+        self.ax_rectangle = ax_rectangle
         self.fig = plt.figure()
         if add_ax:
             self.ax = self.fig.add_axes(self.ax_rectangle)
-        self.legendkwargs = {'frameon': False, 'loc': 'best'}
+        self.legendkwargs = {'frameon': False, 'loc': 'best', 'fontsize': 8}
         self.savefigkwargs = {'format': 'eps', 'dpi': 1200}
         self.plt = plt
 
