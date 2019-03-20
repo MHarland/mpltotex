@@ -28,7 +28,7 @@ def set_prl_parameters(monitor_dpi = 150, fig_width_pt = 510., height_width_rati
               'xtick.top': True,
               'ytick.right': True,
               'axes.axisbelow': False,
-              'lines.linewidth': .75,
+              'lines.linewidth': 1.,
               #'backend': 'ps',
               #"pgf.texsystem": "pdflatex",
               #"pgf.rcfonts": False,
